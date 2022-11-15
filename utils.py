@@ -43,6 +43,5 @@ def add_cors(func):
     def wrapper(*args, **kwargs):
         response = func(*args, **kwargs)
         response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers['Content-Transfer-Encoding'] = 'base64'
         return response
     return wrapper

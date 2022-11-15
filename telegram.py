@@ -1,9 +1,14 @@
+import os
+
 import telebot
 from io import BytesIO
 from PIL import Image, ImageFilter
 from utils import prepare_watermark, merge_watermark
+from dotenv import find_dotenv, load_dotenv
 
-bot = telebot.TeleBot("5782503867:AAEjczM2xFkFjs3vy9QV6r-vv90UcWF7ShQ")
+load_dotenv(find_dotenv())
+
+bot = telebot.TeleBot(os.environ.get("TELEGRAM_KEY"))
 photo = b''
 
 
