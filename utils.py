@@ -26,7 +26,6 @@ def merge_watermark(image, watermark):
     data = []
     for index, value in enumerate(new_data):
         if value != old_data[index]:
-            print(value, old_data[index])
             res = []
             for i, v in enumerate(value):
                 res.append(30 + old_data[index][i])

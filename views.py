@@ -56,7 +56,7 @@ class ImageRed(Resource):
     @ns.expect(parser)
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue, _ = img.split()
+        red, green, blue = img.split()
         zeroed_band = red.point(lambda _: 0)
         red_merge = Image.merge("RGB", (red, zeroed_band, zeroed_band))
         return send_file(conv_pil_to_bytes(red_merge), mimetype="image/*")
@@ -67,7 +67,7 @@ class ImageBlue(Resource):
     @ns.expect(parser)
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue, _ = img.split()
+        red, green, blue = img.split()
         zeroed_band = red.point(lambda _: 0)
         blue_merge = Image.merge("RGB", (zeroed_band, zeroed_band, blue))
         return send_file(conv_pil_to_bytes(blue_merge), mimetype="image/*")
@@ -78,7 +78,7 @@ class ImageGreen(Resource):
     @ns.expect(parser)
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue, _ = img.split()
+        red, green, blue = img.split()
         zeroed_band = red.point(lambda _: 0)
         green_merge = Image.merge("RGB", (zeroed_band, green, zeroed_band))
         return send_file(conv_pil_to_bytes(green_merge), mimetype="image/*")
