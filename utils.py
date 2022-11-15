@@ -1,8 +1,10 @@
 from io import BytesIO
+from functools import wraps
+
 from PIL import ImageFilter, Image
 
 
-def conv_pil_to_bytes(pil_image):
+def conv_pil_to_bytes(pil_image) -> BytesIO:
     img_io = BytesIO()
     pil_image.save(img_io, "PNG")
     img_io.seek(0)
@@ -34,3 +36,13 @@ def merge_watermark(image, watermark):
             data.append(value)
     new_image.putdata(data)
     return new_image
+
+
+def add_cors(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        response = func(*args, **kwargs)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers['Content-Transfer-Encoding'] = 'base64'
+        return response
+    return wrapper
