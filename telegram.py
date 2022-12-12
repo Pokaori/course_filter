@@ -20,7 +20,6 @@ def start(message):
 
 @bot.message_handler(content_types=["photo", "document"])
 def get_filter(message):
-    print(message)
     if message.content_type == 'document':
         file_id = message.document.file_id
     elif message.content_type == "photo":

@@ -77,7 +77,7 @@ class ImageRed(Resource):
     @add_cors
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue = img.split()
+        red, green, blue, _ = img.split()
         zeroed_band = red.point(lambda _: 0)
         red_merge = Image.merge("RGB", (red, zeroed_band, zeroed_band))
         image_link = save_image(conv_pil_to_bytes(red_merge))
@@ -90,7 +90,7 @@ class ImageBlue(Resource):
     @add_cors
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue = img.split()
+        red, green, blue, _ = img.split()
         zeroed_band = red.point(lambda _: 0)
         blue_merge = Image.merge("RGB", (zeroed_band, zeroed_band, blue))
         image_link = save_image(conv_pil_to_bytes(blue_merge))
@@ -103,7 +103,7 @@ class ImageGreen(Resource):
     @add_cors
     def post(self):
         img = Image.open(BytesIO(request.files['image'].read()))
-        red, green, blue = img.split()
+        red, green, blue, _ = img.split()
         zeroed_band = red.point(lambda _: 0)
         green_merge = Image.merge("RGB", (zeroed_band, green, zeroed_band))
         image_link = save_image(conv_pil_to_bytes(green_merge))
